@@ -1,5 +1,9 @@
 pipeline {
-    agent any
+    agent {
+      node {
+        label 'shell'
+      }
+    }
 
     triggers {
         pollSCM('*/5 * * * *')
