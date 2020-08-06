@@ -10,14 +10,6 @@ pipeline {
     }
 
     stages {
-        stage('Clean Workspace') {
-          steps {
-            cleanWs()
-            sh """
-            echo "Cleaned Up Workspace For Project"
-            """
-          }
-        }
         stage('Compile') {
             steps {
                 gradlew('clean', 'classes')
@@ -75,6 +67,14 @@ pipeline {
             steps {
                 unstash 'app'
                 gradlew('deployHeroku')
+            }
+        }
+        stage('Clean Workspace') {
+            steps {
+                cleanWs()
+                sh """
+                echo "Cleaned Up Workspace For Project"
+                """
             }
         }
     }
